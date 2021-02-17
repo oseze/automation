@@ -15,21 +15,21 @@ import time
 
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
-        for filename in os.listdir(folder_to_track):
-            src = folder_to_track + "/" + filename
-            new_destination = folder_destination + "/" + filename
+        for filename in os.listdir(folderorigin):
+            src = folderorigin + "/" + filename
+            new_destination = folderdestination + "/" + filename
             os.rename(src, new_destination)
 
-folder_to_track = "/Users/osezeiyore/myFolder" 
-folder_destination = "/Users/osezeiyore/Desktop/myFolder2"
+folderorigin = "/Users/osezeiyore/Desktop/myFolder" 
+folderdestination = "/Users/osezeiyore/Desktop/myFolder2"
 event_handler = MyHandler()
 observer = Observer()
-observer.schedule(event_handler, folder_to_track, recursive=True)
+observer.schedule(event_handler, folderorigin, recursive=True)
 observer.start()
 
 try:
     while True:
-        time.sleep(10)
+        time.sleep(1)
 except KeyboardInterrupt:
     observer.stop()
 observer.join()
